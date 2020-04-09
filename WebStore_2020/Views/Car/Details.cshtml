@@ -1,0 +1,50 @@
+﻿@model WebStore_2020.Models.CarModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Марка</td>
+        <td>@Model.Mark</td>
+    </tr>
+    <tr>
+        <td>Модель</td>
+        <td>@Model.Model</td>
+    </tr>
+    <tr>
+        <td>Трансмиссия</td>
+        <td>@Model.Transmission</td>
+    </tr>
+    <tr>
+        <td>Год выпуска</td>
+        <td>@Model.YearRelease</td>
+    </tr>
+    <tr>
+        <td>Тип кузова</td>
+        <td>@Model.BodyType</td>
+    </tr>
+    <tr>
+        <td>Цвет</td>
+        <td>@Model.Color</td>
+    </tr>
+    <tr>
+        <td>Привод</td>
+        <td>@Model.Drive</td>
+    </tr>
+    <tr>
+        <td>Объем двигателя</td>
+        <td>@Model.EngineVolume</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Назад", "Index", "/Car")</td>
+    </tr>
+</table>
+
+
