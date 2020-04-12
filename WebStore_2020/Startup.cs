@@ -51,7 +51,7 @@ namespace WebStore_2020
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                               // GET: /<controller>/details/{id}
 
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync(helloMsg); });
+                //endpoints.MapGet("/", async context => { await context.Response.WriteAsync(helloMsg); });
             });
         }
 
