@@ -22,6 +22,7 @@ namespace WebStore_2020
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc();
         }
 
