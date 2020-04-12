@@ -32,6 +32,8 @@ namespace WebStore_2020
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             //ConfigV22(app, env);
 
             ConfigV31(app, env);
