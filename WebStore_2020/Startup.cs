@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore_2020.Infrastructure;
+using WebStore_2020.Infrastructure.Interfaces;
+using WebStore_2020.Infrastructure.Services;
 
 namespace WebStore_2020
 {
@@ -24,7 +26,16 @@ namespace WebStore_2020
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(SimpleActionFilter));
+
+                // альтернативный вариант подключения
+                //options.Filters.Add(new SimpleActionFilter());
+            });
+
+            // Добавляем разрешение зависимости
+            services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
