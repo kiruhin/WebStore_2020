@@ -94,6 +94,8 @@ namespace WebStore_2020
             var helloMsg = _configuration["CustomHelloWorld"];
             helloMsg = _configuration["Logging:LogLevel:Default"];
 
+            //app.UseMvcWithDefaultRoute();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
