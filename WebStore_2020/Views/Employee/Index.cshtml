@@ -7,10 +7,13 @@
 
 <h1>Hello from my first view</h1>
 
+<a asp-action="Edit" class="btn btn-success">Добавить</a>
+
 <table class="table">
     @foreach (var item in Model)
     {
         <tr>
+            <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
             <td>@item.FirstName</td>
             <td>@item.SurName</td>
             <td>@item.Patronymic</td>

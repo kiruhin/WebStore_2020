@@ -1,0 +1,45 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Редактирование сотрудника";
+}
+
+<h2>@ViewData["Title"]</h2>
+@*@Html.EditorForModel()*@
+
+<h4>Сотрудник</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SurName" class="control-label"></label>
+                <input asp-for="SurName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Patronymic" class="control-label"></label>
+                <input asp-for="Patronymic" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Position" class="control-label"></label>
+                <input asp-for="Position" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад к списку</a>
+</div>

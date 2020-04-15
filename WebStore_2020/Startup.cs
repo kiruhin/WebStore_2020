@@ -36,6 +36,8 @@ namespace WebStore_2020
 
             // Добавляем разрешение зависимости
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
+            //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
+            //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
