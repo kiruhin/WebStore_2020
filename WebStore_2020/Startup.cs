@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore_2020.Infrastructure;
 
 namespace WebStore_2020
 {
@@ -35,9 +36,55 @@ namespace WebStore_2020
 
             app.UseStaticFiles();
 
+            app.Map("/index", CustomIndexHandler);
+
+            app.UseMiddleware<TokenMiddleware>();
+
+            UseSampleErrorCheck(app);
+
             //ConfigV22(app, env);
 
             ConfigV31(app, env);
+
+            app.UseWelcomePage("/welcome");
+          
+            RunSample(app);
+        }
+
+        private void UseSampleErrorCheck(IApplicationBuilder app)
+        {
+            app.Use(async (context, next) =>
+            {
+                bool isError = false;
+                // ...
+                if (isError)
+                {
+                    await context.Response
+                        .WriteAsync("Error occured. You're in custom pipeline module...");
+                }
+                else
+                {
+                    await next.Invoke();
+                }
+            });
+        }
+
+        private void RunSample(IApplicationBuilder app)
+        {
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Привет из конвейера обработки запроса (метод app.Run())");
+            });
+
+        }
+
+        private void CustomIndexHandler(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Index");
+            });
+
         }
 
         private void ConfigV31(IApplicationBuilder app, IWebHostEnvironment env)

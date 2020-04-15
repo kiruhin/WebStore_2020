@@ -13,6 +13,7 @@ namespace WebStore_2020.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            //throw new ApplicationException("Ошибочка вышла...");
             return View();
         }
 
