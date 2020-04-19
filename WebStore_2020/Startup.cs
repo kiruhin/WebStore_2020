@@ -35,7 +35,9 @@ namespace WebStore_2020
             });
 
             // Добавляем разрешение зависимости
+            //services.AddSingleton<InMemoryEmployeeService>();
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
+            services.AddSingleton<IProductService, InMemoryProductService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
         }
