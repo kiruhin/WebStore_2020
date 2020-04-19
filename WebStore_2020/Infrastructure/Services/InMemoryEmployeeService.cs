@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebStore_2020.Infrastructure.Interfaces;
-using WebStore_2020.Models;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Models;
 
-namespace WebStore_2020.Infrastructure.Services
+namespace WebStore.Infrastructure.Services
 {
     public class InMemoryEmployeeService : IEmployeesService
     {

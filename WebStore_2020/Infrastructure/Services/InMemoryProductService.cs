@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WebStore.Domain.Entities;
-using WebStore_2020.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Interfaces;
 
-namespace WebStore_2020.Infrastructure.Services
+namespace WebStore.Infrastructure.Services
 {
     public class InMemoryProductService : IProductService
     {

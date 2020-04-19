@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore_2020.Models;
+﻿using System.Collections.Generic;
+using WebStore.Models;
 
-namespace WebStore_2020.Infrastructure.Interfaces
+namespace WebStore.Infrastructure.Interfaces
 {
     public interface IEmployeesService
     {

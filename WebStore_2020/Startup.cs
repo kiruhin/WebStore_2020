@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebStore_2020.Infrastructure;
-using WebStore_2020.Infrastructure.Interfaces;
-using WebStore_2020.Infrastructure.Services;
+using WebStore.Infrastructure;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
-namespace WebStore_2020
+namespace WebStore
 {
     public class Startup
     {
