@@ -11,6 +11,7 @@ namespace WebStore.DAL
     {
         public static void Initialize(WebStoreContext context)
         {
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             // Look for any products.
             if (context.Products.Any())
@@ -18,7 +19,7 @@ namespace WebStore.DAL
                 return;   // DB had already been seeded
             }
 
-            var categories =  new List<Category>()
+            var categories = new List<Category>()
             {
                 new Category()
                 {
@@ -244,7 +245,7 @@ namespace WebStore.DAL
                 trans.Commit();
             }
 
-            var brands =  new List<Brand>()
+            var brands = new List<Brand>()
             {
                 new Brand()
                 {
@@ -296,13 +297,13 @@ namespace WebStore.DAL
                     context.Brands.Add(brand);
                 }
 
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Brands] ON");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[ProductBrands] ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[ProductBrands] OFF");
                 trans.Commit();
             }
 
-            var products =  new List<Product>()
+            var products = new List<Product>()
             {
                 new Product()
                 {
@@ -439,3 +440,4 @@ namespace WebStore.DAL
         }
     }
 }
+

@@ -35,11 +35,10 @@ namespace WebStore
             services.AddDbContext<WebStoreContext>(options => options
                 .UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
-
             // Добавляем разрешение зависимости
             //services.AddSingleton<InMemoryEmployeeService>();
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
-            services.AddSingleton<IProductService, InMemoryProductService>();
+            services.AddScoped<IProductService, SqlProductService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
         }
