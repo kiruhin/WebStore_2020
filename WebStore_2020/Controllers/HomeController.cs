@@ -22,11 +22,6 @@ namespace WebStore.Controllers
             return View();
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         public IActionResult ContactUs()
         {
             return View();
