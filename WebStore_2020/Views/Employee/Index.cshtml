@@ -3,24 +3,33 @@
 @{
     //Layout = null;
     ViewData["Title"] = "Index";
+    var isAdmin = User.IsInRole("Admins");
 }
 
 <h1>Hello from my first view</h1>
-
-<a asp-action="Edit" class="btn btn-success">Добавить</a>
+@if (isAdmin)
+{
+    <a asp-action="Edit" class="btn btn-success">Добавить</a>
+}
 
 <table class="table">
     @foreach (var item in Model)
     {
-        <tr>
+    <tr>
+        @if (isAdmin)
+        {
             <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
-            <td>@item.FirstName</td>
-            <td>@item.SurName</td>
-            <td>@item.Patronymic</td>
-            <td>
-                @Html.ActionLink("Детали", "Details", new { id = item.Id })
-            </td>
+        }
+        <td>@item.FirstName</td>
+        <td>@item.SurName</td>
+        <td>@item.Patronymic</td>
+        <td>
+            @Html.ActionLink("Детали", "Details", new { id = item.Id })
+        </td>
+        @if (isAdmin)
+        {
             <td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-cut"></i></a></td>
-        </tr>
+        }
+    </tr>
     }
 </table>

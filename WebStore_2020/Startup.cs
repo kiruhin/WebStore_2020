@@ -88,6 +88,7 @@ namespace WebStore
             }
 
             app.UseStaticFiles();
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -104,7 +105,7 @@ namespace WebStore
 
             app.UseWelcomePage("/welcome");
           
-            RunSample(app);
+            //RunSample(app);
         }
 
         private void UseSampleErrorCheck(IApplicationBuilder app)
@@ -145,7 +146,6 @@ namespace WebStore
 
         private void ConfigV31(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseRouting();
 
             var helloMsg = _configuration["CustomHelloWorld"];
             helloMsg = _configuration["Logging:LogLevel:Default"];
