@@ -78,6 +78,9 @@ namespace WebStore
             services.AddScoped<IProductService, SqlProductService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ICartService, CookieCartService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
