@@ -76,6 +76,7 @@ namespace WebStore
             //services.AddSingleton<InMemoryEmployeeService>();
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
             services.AddScoped<IProductService, SqlProductService>();
+            services.AddScoped<IOrdersService, SqlOrdersService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
 
