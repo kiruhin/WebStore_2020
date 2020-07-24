@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore.Clients;
 using WebStore.DAL;
 using WebStore.DomainNew.Entities;
 using WebStore.Infrastructure;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
+using WebStore.Interfaces;
 
 namespace WebStore
 {
@@ -79,6 +81,8 @@ namespace WebStore
             services.AddScoped<IOrdersService, SqlOrdersService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
+
+            services.AddTransient<IValuesService, ValuesClient>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICartService, CookieCartService>();
