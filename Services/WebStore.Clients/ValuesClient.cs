@@ -16,7 +16,7 @@ namespace WebStore.Clients
             ServiceAddress = "api/values";
         }
 
-        protected override string ServiceAddress { get; set; }
+        protected override string ServiceAddress { get; }
 
         public IEnumerable<string> Get()
         {

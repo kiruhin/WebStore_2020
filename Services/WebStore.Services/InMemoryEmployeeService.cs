@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
@@ -61,6 +62,29 @@ namespace WebStore.Infrastructure.Services
                 return;
 
             _employees.Remove(employee);
+        }
+
+        public EmployeeViewModel UpdateEmployee(int id, EmployeeViewModel entity)
+        {
+            if (entity is null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var employee = _employees.FirstOrDefault(e => e.Id == id);
+            if (employee is null)
+            {
+                throw new InvalidOperationException("Employee not exits");
+            }
+
+            // заполним поля модели
+            employee.Age = entity.Age;
+            employee.FirstName = entity.FirstName;
+            employee.Patronymic = entity.Patronymic;
+            employee.SurName = entity.SurName;
+            employee.Position = entity.Position;
+
+            return employee;
         }
     }
 }
