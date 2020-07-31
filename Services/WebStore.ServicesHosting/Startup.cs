@@ -38,7 +38,7 @@ namespace WebStore.ServicesHosting
             // Добавляем разрешение зависимостей
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
 
-            //services.AddScoped<IProductService, SqlProductService>();
+            services.AddScoped<IProductService, SqlProductService>();
             //services.AddScoped<IOrdersService, SqlOrdersService>();
 
             //// Настройки для корзины

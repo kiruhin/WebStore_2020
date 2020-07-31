@@ -77,7 +77,7 @@ namespace WebStore
             // Добавляем разрешение зависимости
             //services.AddSingleton<InMemoryEmployeeService>();
             services.AddSingleton<IEmployeesService, EmployeesClient>();
-            services.AddScoped<IProductService, SqlProductService>();
+            services.AddScoped<IProductService, ProductsClient>();
             services.AddScoped<IOrdersService, SqlOrdersService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();

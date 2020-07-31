@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.DAL;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
+using WebStore.DomainNew.Dto;
+using WebStore.DomainNew.Helpers;
 using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services
@@ -28,7 +30,7 @@ namespace WebStore.Infrastructure.Services
             return _context.Brands.ToList();
         }
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter)
+        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
         {
             var query = _context.Products
                 .Include(p => p.Category) // жадная загрузка (Eager Load) для категорий
@@ -40,15 +42,18 @@ namespace WebStore.Infrastructure.Services
             if (filter.CategoryId.HasValue)
                 query = query.Where(c => c.CategoryId.Equals(filter.CategoryId.Value));
 
-            return query.ToList();
+            return query
+                .Select(p => p.ToDto())
+                .ToList();
         }
 
-        public Product GetProductById(int id)
+        public ProductDto GetProductById(int id)
         {
             return _context.Products
                 .Include(p => p.Category) // жадная загрузка (Eager Load) для категорий
                 .Include(p => p.Brand) // жадная загрузка (Eager Load) для брендов
-                .FirstOrDefault(p => p.Id == id);
+                .FirstOrDefault(p => p.Id == id)
+                .ToDto();
 
         }
     }

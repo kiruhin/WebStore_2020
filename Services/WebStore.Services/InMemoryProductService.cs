@@ -2,6 +2,8 @@
 using System.Linq;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
+using WebStore.DomainNew.Dto;
+using WebStore.DomainNew.Helpers;
 using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services
@@ -407,7 +409,7 @@ namespace WebStore.Infrastructure.Services
             return _brands;
         }
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter)
+        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
         {
             var products = _products;
 
@@ -424,12 +426,14 @@ namespace WebStore.Infrastructure.Services
                     .ToList();
             }
 
-            return products;
+            return products
+                .Select(p => p.ToDto())
+                .ToList();
         }
 
-        public Product GetProductById(int id)
+        public ProductDto GetProductById(int id)
         {
-            return _products.FirstOrDefault(p => p.Id == id);
+            return _products.FirstOrDefault(p => p.Id == id).ToDto();
         }
     }
 }
