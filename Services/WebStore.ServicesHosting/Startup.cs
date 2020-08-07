@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebStore.DAL;
+using WebStore.DomainNew.Entities;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
 
@@ -39,11 +41,16 @@ namespace WebStore.ServicesHosting
             services.AddSingleton<IEmployeesService, InMemoryEmployeeService>();
 
             services.AddScoped<IProductService, SqlProductService>();
-            //services.AddScoped<IOrdersService, SqlOrdersService>();
+            services.AddScoped<IOrdersService, SqlOrdersService>();
 
             //// Настройки для корзины
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddScoped<ICartService, CookieCartService>();
+
+            // Настройка Identity
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<WebStoreContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

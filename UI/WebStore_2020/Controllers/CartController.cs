@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.DomainNew.Dto.Order;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
@@ -55,14 +56,35 @@ namespace WebStore.Controllers
             return Redirect(returnUrl);
         }
 
+        /// <summary>
+        /// создание заказа
+        /// </summary>
+        /// <returns></returns>
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult CheckOut(OrderViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var orderResult = _ordersService.CreateOrder(model, _cartService.TransformCart(), User.Identity.Name);
+                var orderModel = new CreateOrderDto()
+                {
+                    OrderViewModel = model,
+                    OrderItems = new List<OrderItemDto>()
+                };
+                foreach (var orderItem in _cartService.TransformCart().Items)
+                {
+                    // Todo: студентам самостоятельно перенести в OrderItemMapper
+                    orderModel.OrderItems.Add(new OrderItemDto()
+                    {
+                        Id = orderItem.Key.Id,
+                        Price = orderItem.Key.Price,
+                        Quantity = orderItem.Value
+                    });
+                }
+
+                var orderResult = _ordersService.CreateOrder(orderModel, User.Identity.Name);
+
                 _cartService.RemoveAll();
-                return RedirectToAction("OrderConfirmed", new { id = orderResult.Id });
+                return RedirectToAction("OrderConfirmed", new { orderResult.Id });
             }
 
             var detailsModel = new OrderDetailsViewModel()
@@ -73,7 +95,6 @@ namespace WebStore.Controllers
 
             return View("Details", detailsModel);
         }
-
         public IActionResult OrderConfirmed(int id)
         {
             @ViewBag.OrderId = id;
