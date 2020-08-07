@@ -9,12 +9,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Clients;
 using WebStore.Clients.Services;
+using WebStore.Clients.Services.Users;
 using WebStore.DAL;
 using WebStore.DomainNew.Entities;
 using WebStore.Infrastructure;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
 using WebStore.Interfaces;
+using WebStore.Services;
 
 namespace WebStore
 {
@@ -80,10 +82,23 @@ namespace WebStore
             services.AddSingleton<IEmployeesService, EmployeesClient>();
             services.AddScoped<IProductService, ProductsClient>();
             services.AddScoped<IOrdersService, OrdersClient>();
+            services.AddTransient<IUsersClient, UsersClient>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeeService>();
             //services.AddTransient<IEmployeesService, InMemoryEmployeeService>();
 
             services.AddTransient<IValuesService, ValuesClient>();
+
+            services.AddTransient<IUserStore<User>, CustomUserStore>();
+            services.AddTransient<IUserRoleStore<User>, CustomUserStore>();
+            services.AddTransient<IUserClaimStore<User>, CustomUserStore>();
+            services.AddTransient<IUserPasswordStore<User>, CustomUserStore>();
+            services.AddTransient<IUserTwoFactorStore<User>, CustomUserStore>();
+            services.AddTransient<IUserEmailStore<User>, CustomUserStore>();
+            services.AddTransient<IUserPhoneNumberStore<User>, CustomUserStore>();
+            services.AddTransient<IUserLoginStore<User>, CustomUserStore>();
+            services.AddTransient<IUserLockoutStore<User>, CustomUserStore>();
+            services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICartService, CookieCartService>();
