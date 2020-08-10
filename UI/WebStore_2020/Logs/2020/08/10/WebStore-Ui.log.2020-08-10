@@ -6,3 +6,106 @@
 
 2020-08-10 22:02:05,117 [11] ?     - critical! winter is coming!
 
+2020-08-10 22:13:10,905 [1] ?     - Application - Main is invoked
+
+2020-08-10 22:13:11,680 [10] ?     - error! winter is coming!
+
+2020-08-10 22:13:11,682 [10] ?     - critical! winter is coming!
+
+2020-08-10 22:13:11,766 [10] ?     - An unhandled exception has occurred while executing the request.
+
+2020-08-10 22:19:42,963 [1] ?     - Application - Main is invoked
+
+2020-08-10 22:19:47,475 [15] ?     - error! winter is coming!
+
+2020-08-10 22:19:47,475 [15] ?     - critical! winter is coming!
+
+2020-08-10 22:19:47,483 [15] ?     - Ошибочка вышла...
+
+System.ApplicationException: Ошибочка вышла...
+   at WebStore.Controllers.HomeController.Index() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Controllers\HomeController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at WebStore.Startup.<>c.<<UseSampleErrorCheck>b__4_0>d.MoveNext() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Startup.cs:line 155
+--- End of stack trace from previous location where exception was thrown ---
+   at WebStore.Infrastructure.TokenMiddleware.InvokeAsync(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Infrastructure\TokenMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at WebStore.Services.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\Services\WebStore.Services\ErrorHandlingMiddleware.cs:line 24
+2020-08-10 22:19:47,540 [15] ?     - An unhandled exception has occurred while executing the request.
+
+2020-08-10 22:26:14,479 [1] ?     - Application - Main is invoked
+
+2020-08-10 22:26:15,261 [10] ?     - error! winter is coming!
+
+2020-08-10 22:26:15,263 [10] ?     - critical! winter is coming!
+
+2020-08-10 22:26:15,268 [10] ?     - Ошибочка вышла...
+
+System.ApplicationException: Ошибочка вышла...
+   at WebStore.Controllers.HomeController.Index() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Controllers\HomeController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at WebStore.Startup.<>c.<<UseSampleErrorCheck>b__4_0>d.MoveNext() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Startup.cs:line 161
+--- End of stack trace from previous location where exception was thrown ---
+   at WebStore.Infrastructure.TokenMiddleware.InvokeAsync(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Infrastructure\TokenMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at WebStore.Services.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\Services\WebStore.Services\ErrorHandlingMiddleware.cs:line 24
+2020-08-10 22:26:15,310 [10] ?     - An unhandled exception has occurred while executing the request.
+
+2020-08-10 22:26:49,079 [1] ?     - Application - Main is invoked
+
+2020-08-10 22:26:49,747 [10] ?     - error! winter is coming!
+
+2020-08-10 22:26:49,748 [10] ?     - critical! winter is coming!
+
+2020-08-10 22:26:49,754 [10] ?     - Ошибочка вышла...
+
+System.ApplicationException: Ошибочка вышла...
+   at WebStore.Controllers.HomeController.Index() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Controllers\HomeController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at WebStore.Startup.<>c.<<UseSampleErrorCheck>b__4_0>d.MoveNext() in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Startup.cs:line 161
+--- End of stack trace from previous location where exception was thrown ---
+   at WebStore.Infrastructure.TokenMiddleware.InvokeAsync(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\UI\WebStore_2020\Infrastructure\TokenMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at WebStore.Services.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Users\kiruh\source\repos\WebStore_2020\Services\WebStore.Services\ErrorHandlingMiddleware.cs:line 24
+2020-08-10 22:26:49,789 [10] ?     - An unhandled exception has occurred while executing the request.
+

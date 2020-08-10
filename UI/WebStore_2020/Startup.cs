@@ -115,6 +115,13 @@ namespace WebStore
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            app.UseStatusCodePagesWithRedirects("~/home/errorstatus/{0}");
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -122,7 +129,8 @@ namespace WebStore
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.Map("/index", CustomIndexHandler);
+
+            //app.Map("/index", CustomIndexHandler);
 
             app.UseMiddleware<TokenMiddleware>();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using WebStore.Infrastructure;
@@ -32,9 +33,22 @@ namespace WebStore.Controllers
             _logger?.LogError("error! winter is coming!");
             _logger?.LogCritical("critical! winter is coming!");
 
-            //throw new ApplicationException("Ошибочка вышла...");
+            throw new ApplicationException("Ошибочка вышла...");
             var values = await _valueService.GetAsync();
             return View(values);
+        }
+
+        public IActionResult ErrorStatus(string id)
+        {
+            if (id == "404")
+                return RedirectToAction("NotFound");
+
+            return Content($"Статуcный код ошибки: {id}");
+        }
+ 
+        public IActionResult Error()
+        {
+            return View();
         }
 
         // GET: /<controller>/blog
