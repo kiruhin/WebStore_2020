@@ -33,6 +33,7 @@ namespace WebStore.ServicesHosting.Controllers
             return _employeesService.GetById(id);
         }
 
+        [NonAction]
         public void Commit()
         {
         }

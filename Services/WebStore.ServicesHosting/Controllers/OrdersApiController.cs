@@ -29,7 +29,7 @@ namespace WebStore.ServicesHosting.Controllers
             return _ordersService.GetOrderById(id);
         }
 
-        [HttpPost("{userName}")]
+        [HttpPost("{userName?}")]
         [ActionName("Post")]
         public OrderDto CreateOrder([FromBody]CreateOrderDto createOrderDto, string userName)
         {
