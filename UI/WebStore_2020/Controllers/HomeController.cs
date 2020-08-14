@@ -33,7 +33,7 @@ namespace WebStore.Controllers
             _logger?.LogError("error! winter is coming!");
             _logger?.LogCritical("critical! winter is coming!");
 
-            throw new ApplicationException("Ошибочка вышла...");
+            //throw new ApplicationException("Ошибочка вышла...");
             var values = await _valueService.GetAsync();
             return View(values);
         }
