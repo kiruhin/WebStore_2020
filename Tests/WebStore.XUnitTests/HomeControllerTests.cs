@@ -8,16 +8,19 @@ using Moq;
 using WebStore.Controllers;
 using WebStore.Interfaces;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace WebStore.XUnitTests
 {
     public class HomeControllerTests
     {
+        private readonly ITestOutputHelper _output;
         private HomeController _controller;
 
         //ctor
-        public HomeControllerTests()
+        public HomeControllerTests(ITestOutputHelper output)
         {
+            _output = output;
             var mockService = new Mock<IValuesService>();
             mockService
                 .Setup(c => c.GetAsync())
@@ -26,9 +29,37 @@ namespace WebStore.XUnitTests
             _controller = new HomeController(mockService.Object, null);
         }
 
+        public static IEnumerable<object[]> TestData
+            => new object[][] {
+                new object[] { 42 },
+                new object[] { 21.12 },
+                new object[] { DateTime.Now },
+                new object[] { null }
+            };
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void UnrunTestRepro(object data)
+        {
+            Assert.NotNull(data);
+        }
+
+        [Theory(DisplayName = "Add Numbers")]
+        [InlineData(4, 5, 9)]
+        [InlineData(2, 3, 5)]
+        public void TestAddNumbers(int x, int y, int expectedResult)
+        {
+            _output.WriteLine($"current x={x}");
+        
+            Assert.Equal(4, x);
+            Assert.Equal(5, y);
+        }
+
         [Fact]
         public async Task Index_Method_Returns_View_With_Values()
         {
+            _output.WriteLine("This is extra output...");
+
             // Arrange - подготовка
 
             // Act – проверяемое действие
