@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -19,7 +17,7 @@ namespace WebStore.XUnitTests
         Mock<IOrdersService> _mockOrdersService;
         CartController _controller;
 
-
+        // ctor
         public CartControllerTests()
         {
             // инициализируем мок-сервисы и контроллер
@@ -29,24 +27,29 @@ namespace WebStore.XUnitTests
         }
 
         [Fact]
+        // проверяем поведение метода _controller.CheckOut при наличии ошибки в модели
         public void CheckOut_ModelState_Invalid_Returns_ViewModel()
         {
             // Arrange
+            // добавим ошибку в ModelState
             _controller.ModelState.AddModelError("error", "InvalidModel");
-            
-            // Act 
+
+            // Act
             var result = _controller.CheckOut(new OrderViewModel
             {
                 Name = "test"
             });
-            
+
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<OrderDetailsViewModel>(viewResult.ViewData.Model);
+            // модель все равно должна была создаться
             Assert.Equal("test", model.OrderViewModel.Name);
         }
 
         [Fact]
+        //проверяем, что при создании заказа нас действительно перенаправляют на страницу с подтверждением
+        //также проверим id модели
         public void CheckOut_Calls_Service_And_Return_Redirect()
         {
             #region Arrange
@@ -55,6 +58,7 @@ namespace WebStore.XUnitTests
                 new Claim(ClaimTypes.NameIdentifier, "1"),
             }));
 
+            // setting up cartService
             _mockCartService
                 .Setup(c => c.TransformCart())
                 .Returns(new CartViewModel
@@ -65,6 +69,7 @@ namespace WebStore.XUnitTests
                     }
                 });
 
+            // setting up ordersService
             _mockOrdersService
                 .Setup(c => c.CreateOrder(
                     It.IsAny<CreateOrderDto>(),
@@ -78,7 +83,7 @@ namespace WebStore.XUnitTests
                     User = user
                 }
             };
-            #endregion 
+            #endregion
 
             // Act
             var result = _controller.CheckOut(new OrderViewModel
@@ -90,9 +95,13 @@ namespace WebStore.XUnitTests
 
             // Assert
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            // имя контроллера должно быть пустым при редиректе
             Assert.Null(redirectResult.ControllerName);
+            // имя action-метода должно быть "OrderConfirmed" (куда перенаправили)
             Assert.Equal("OrderConfirmed", redirectResult.ActionName);
+            // id заказа = 1 (какой и передали в модели)
             Assert.Equal(1, redirectResult.RouteValues["id"]);
         }
+
     }
 }

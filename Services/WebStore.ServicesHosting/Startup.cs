@@ -57,7 +57,7 @@ namespace WebStore.ServicesHosting
 
             //// Настройки для корзины
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddScoped<ICartService, CookieCartService>();
+            services.AddScoped<ICartService, CartService>();
 
             // Настройка Identity
             services.AddIdentity<User, IdentityRole>()

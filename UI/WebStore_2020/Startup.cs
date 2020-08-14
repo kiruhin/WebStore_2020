@@ -103,7 +103,8 @@ namespace WebStore
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ICartService, CookieCartService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartStore, CookiesCartStore>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
