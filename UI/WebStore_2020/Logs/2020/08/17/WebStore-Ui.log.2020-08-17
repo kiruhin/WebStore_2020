@@ -366,3 +366,9 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 2020-08-17 22:54:39,480 [24] ?     - critical! winter is coming!
 
+2020-08-17 23:06:37,470 [1] ?     - Application - Main is invoked
+
+2020-08-17 23:06:38,319 [9] ?     - error! winter is coming!
+
+2020-08-17 23:06:38,320 [9] ?     - critical! winter is coming!
+
