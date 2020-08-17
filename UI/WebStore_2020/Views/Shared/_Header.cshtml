@@ -93,9 +93,9 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="Index" is-active-route>Home</a></li>
                             <li class="dropdown">
-                                <a asp-controller="Catalog" asp-action="Shop">Shop<i class="fa fa-angle-down"></i></a>
+                                <a asp-controller="Catalog" asp-action="Shop" ignore-action is-active-route>Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a asp-controller="Catalog" asp-action="Shop">Products</a></li>
                                     <li><a asp-controller="Catalog" asp-action="ProductDetails">Product Details</a></li>
@@ -105,15 +105,14 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a asp-controller="Home" asp-action="Blog">Blog<i class="fa fa-angle-down"></i></a>
+                                <a asp-controller="Home" asp-action="Blog" is-active-route>Blog<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a asp-controller="Home" asp-action="Blog">Blog List</a></li>
                                     <li><a asp-controller="Home" asp-action="BlogSingle">Blog Single</a></li>
                                 </ul>
                             </li>
-                            <li><a asp-controller="Home" asp-action="NotFound">404</a></li>
-                            <li><a asp-controller="Home" asp-action="ContactUs">Contact</a></li>
-                            <li><a asp-controller="Employee" asp-action="Index">Employees</a></li>
+                            <li><a asp-controller="Home" asp-action="ContactUs" is-active-route>Contact</a></li>
+                            <li><a asp-controller="Employee" asp-action="Index" ignore-action is-active-route>Employees</a></li>
                         </ul>
                     </div>
                 </div>
