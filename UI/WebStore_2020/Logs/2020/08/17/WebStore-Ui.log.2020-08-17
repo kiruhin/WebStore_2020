@@ -26,3 +26,19 @@
 
 2020-08-17 21:37:53,966 [22] ?     - critical! winter is coming!
 
+2020-08-17 21:58:02,417 [1] ?     - Application - Main is invoked
+
+2020-08-17 21:59:24,971 [1] ?     - Application - Main is invoked
+
+2020-08-17 22:00:54,384 [1] ?     - Application - Main is invoked
+
+2020-08-17 22:01:00,074 [4] ?     - error! winter is coming!
+
+2020-08-17 22:01:00,077 [4] ?     - critical! winter is coming!
+
+2020-08-17 22:11:17,207 [1] ?     - Application - Main is invoked
+
+2020-08-17 22:11:17,926 [4] ?     - error! winter is coming!
+
+2020-08-17 22:11:17,927 [4] ?     - critical! winter is coming!
+

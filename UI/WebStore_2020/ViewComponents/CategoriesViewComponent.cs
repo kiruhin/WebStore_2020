@@ -2,63 +2,90 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.DomainNew.ViewModels;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
 namespace WebStore.ViewComponents
 {
-    //[ViewComponent(Name = "Categories")]
-    public class CategoriesViewComponent : ViewComponent
+    public class Sections : ViewComponent
     {
         private readonly IProductService _productService;
 
-        public CategoriesViewComponent(IProductService productService)
+        public Sections(IProductService productService)
         {
             _productService = productService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        // основной метод компонента теперь будет принимать параметр sectionId
+        public async Task<IViewComponentResult> InvokeAsync(string sectionId)
         {
-            var _categories = GetCategories();
-            return View(_categories);
+            // сконвертируем строковый sectionId в число
+            int.TryParse(sectionId, out var sectionIdInt);
+            // будем получать id родительской секции в методе GetSections()
+            var sections = GetSections(sectionIdInt, out var parentSectionId);
+            // возвращать будем новую модель с инфой о текущей секции/категории
+            return View(new SectionCompleteViewModel
+            {
+                Sections = sections, 
+                CurrentSectionId = sectionIdInt, 
+                CurrentParentSectionId = parentSectionId
+            });
         }
 
-        private List<CategoryViewModel> GetCategories()
+        /// <summary>
+        /// Получает секции из базы и строит дерево
+        /// также получает id родительской категории для переданной категории
+        /// </summary>
+        /// <returns></returns>
+        private List<CategoryViewModel> GetSections(int? sectionId, out int? parentSectionId)
         {
+            parentSectionId = null;
+
             var categories = _productService.GetCategories();
+
+            var parentCategories = categories.Where(x => !x.ParentId.HasValue).ToArray();
+            var parentSections = new List<CategoryViewModel>();
+
             // получим и заполним родительские категории
-            var parentSections = categories.Where(p => !p.ParentId.HasValue).ToArray();
-            var parentCategories = new List<CategoryViewModel>();
-            foreach (var parentCategory in parentSections)
+            foreach (var parentCategory in parentCategories)
             {
-                parentCategories.Add(new CategoryViewModel()
+                parentSections.Add(new CategoryViewModel()
                 {
                     Id = parentCategory.Id,
                     Name = parentCategory.Name,
                     Order = parentCategory.Order,
-                    ParentCategory = null
+                    ParentCategory= null
                 });
             }
 
             // получим и заполним дочерние категории
-            foreach (var CategoryViewModel in parentCategories)
+            foreach (var sectionViewModel in parentSections)
             {
-                var childCategories = categories.Where(c => c.ParentId == CategoryViewModel.Id);
+                var childCategories = categories.Where(c => c.ParentId == sectionViewModel.Id);
                 foreach (var childCategory in childCategories)
                 {
-                    CategoryViewModel.ChildCategories.Add(new CategoryViewModel()
+                    // определение родительской категории
+                    if (childCategory.Id == sectionId)
+                        parentSectionId = sectionViewModel.Id;
+
+                    sectionViewModel.ChildCategories.Add(new CategoryViewModel
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,
                         Order = childCategory.Order,
-                        ParentCategory = CategoryViewModel
+                        ParentCategory = sectionViewModel
                     });
                 }
-                CategoryViewModel.ChildCategories = CategoryViewModel.ChildCategories.OrderBy(c => c.Order).ToList();
-            }
-            parentCategories = parentCategories.OrderBy(c => c.Order).ToList();
-            return parentCategories;
-        }
 
+                sectionViewModel.ChildCategories = sectionViewModel.ChildCategories
+                    .OrderBy(c => c.Order)
+                    .ToList();
+            }
+
+            parentSections = parentSections.OrderBy(c => c.Order).ToList();
+
+            return parentSections;
+        }
     }
 }
