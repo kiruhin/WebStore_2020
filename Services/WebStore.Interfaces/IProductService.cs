@@ -17,5 +17,13 @@ namespace WebStore.Infrastructure.Interfaces
         /// <param name="id">Идентификатор</param>
         /// <returns>Сущность Product, если нашел, иначе null</returns>
         ProductDto GetProductById(int id);
+
+        /// <summary>Секция по Id</summary>
+        /// <param name="id">Id</param>
+        Category GetSectionById(int id);
+
+        /// <summary>Бренд по Id</summary>
+        /// <param name="id">Id</param>
+        Brand GetBrandById(int id);
     }
 }

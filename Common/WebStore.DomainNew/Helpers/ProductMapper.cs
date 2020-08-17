@@ -17,7 +17,13 @@ namespace WebStore.DomainNew.Helpers
                 Price = p.Price,
                 ImageUrl = p.ImageUrl,
                 // добавим информацию о бренде, если она есть
-                Brand = p.BrandId.HasValue ? new BrandDto {Id = p.Brand.Id, Name = p.Brand.Name} : null
+                Brand = p.BrandId.HasValue ? new BrandDto {Id = p.Brand.Id, Name = p.Brand.Name} : null,
+                Section = new SectionDto
+                {
+                    Id = p.CategoryId,
+                    Name = p.Category.Name
+                }
+
             };
 
     }

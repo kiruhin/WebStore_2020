@@ -34,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Logger", "Common\W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E660BA39-5965-4EB6-A850-7B4EB86C4547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.XUnitTests", "Tests\WebStore.XUnitTests\WebStore.XUnitTests.csproj", "{D20159C7-AE01-4A42-8983-896EC48A84BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.XUnitTests", "Tests\WebStore.XUnitTests\WebStore.XUnitTests.csproj", "{D20159C7-AE01-4A42-8983-896EC48A84BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

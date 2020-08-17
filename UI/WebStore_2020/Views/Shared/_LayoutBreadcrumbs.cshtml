@@ -1,0 +1,49 @@
+﻿@using WebStore.DomainNew.ViewModels
+@{
+    Layout = "_Layout";
+
+    // Получаем тип для бренда или секции
+    var type = Context.Request.Query.ContainsKey("sectionId")
+        ? BreadCrumbType.Section
+        : Context.Request.Query.ContainsKey("brandId")
+            ? BreadCrumbType.Brand
+            : BreadCrumbType.None;
+
+    // Устанавливаем дефолтное значение источника
+    var fromType = BreadCrumbType.Section;
+
+    // Если это метод деталей товара
+    if ((string)ViewContext.RouteData.Values["action"] == "ProductDetails")
+    {
+        // Устанавливаем тип товара
+        type = BreadCrumbType.Item;
+    }
+
+    var id = 0;
+
+    switch (type)
+    {
+        case BreadCrumbType.None:
+            break;
+        case BreadCrumbType.Section:
+            id = int.Parse(Context.Request.Query["sectionId"].ToString());
+            break;
+        case BreadCrumbType.Brand:
+            id = int.Parse(Context.Request.Query["brandId"].ToString());
+            break;
+        case BreadCrumbType.Item:
+            // Если есть ключ того, что пришли с бренда,
+            // ставим источник – бренд
+            if (Context.Request.Query.ContainsKey("fromBrand"))
+            {
+                fromType = BreadCrumbType.Brand;
+            }
+            id = int.Parse(ViewContext.RouteData.Values["id"].ToString());
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+
+    @(await Component.InvokeAsync("BreadCrumbs", new { type, id, fromType }))
+    @RenderBody()
+}

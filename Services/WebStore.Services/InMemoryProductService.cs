@@ -435,5 +435,15 @@ namespace WebStore.Infrastructure.Services
         {
             return _products.FirstOrDefault(p => p.Id == id).ToDto();
         }
+
+        public Category GetSectionById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Brand GetBrandById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

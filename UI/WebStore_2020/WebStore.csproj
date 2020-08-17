@@ -35,4 +35,8 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Shared\Components\BreadCrumbs\Default.cshtml" />
+  </ItemGroup>
+
 </Project>
