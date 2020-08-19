@@ -341,3 +341,5 @@ healthchecksdb
 /WebStore_2020/wwwroot/css/site.min.css
 /WebStore_2020/wwwroot/js/site.min.js
 /WebStore_2020/wwwroot/js/site.min.js.map
+/UI/WebStore_2020/Logs
+/Services/WebStore.ServicesHosting/Logs/
