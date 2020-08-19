@@ -1,35 +1,35 @@
-﻿@model WebStore.DomainNew.ViewModels.SectionCompleteViewModel
+﻿@model WebStore.DomainNew.ViewModels.CategoryCompleteViewModel
 
-<h2>Category</h2>
+<h2>Категории</h2>
 <div class="panel-group category-products" id="accordian">
     <!--category-products-->
 
-    @foreach (var parentSection in Model.Sections)
+    @foreach (var parentCategory in Model.Categories)
     {
-        if (parentSection.ChildCategories.Count > 0)
+        if (parentCategory.ChildCategories.Count > 0)
         {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordian"
-                           href="#@parentSection.Name.ToLower()">
+                           href="#@parentCategory.Name.ToLower()">
                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                            @parentSection.Name
+                            @parentCategory.Name
                         </a>
                     </h4>
                 </div>
-                <div id="@parentSection.Name.ToLower()"
+                <div id="@parentCategory.Name.ToLower()"
                      class="panel-collapse
-                        collapse @(parentSection.Id == Model.CurrentParentSectionId ? "in":null)">
+                        collapse @(parentCategory.Id == Model.CurrentParentCategoryId ? "in":null)">
                     <div class="panel-body">
                         <ul>
-                            @foreach (var childSection in parentSection.ChildCategories)
+                            @foreach (var childCategory in parentCategory.ChildCategories)
                             {
-                                <li @(childSection.Id == Model.CurrentSectionId ? "class=active" : null)>
+                                <li @(childCategory.Id == Model.CurrentCategoryId ? "class=active" : null)>
                                     <a asp-controller="Catalog"
                                        asp-action="Shop"
-                                       asp-route-sectionId="@childSection.Id">
-                                        @childSection.Name
+                                       asp-route-categoryId="@childCategory.Id">
+                                        @childCategory.Name
                                     </a>
                                 </li>
                             }
@@ -40,15 +40,15 @@
         }
         else
         {
-            var isActiveCssClass = (parentSection.Id == Model.CurrentSectionId) ? "active" : "";
+            var isActiveCssClass = (parentCategory.Id == Model.CurrentCategoryId) ? "active" : "";
 
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title @isActiveCssClass">
                         <a asp-controller="Catalog"
                            asp-action="Shop"
-                           asp-route-sectionId="@parentSection.Id">
-                            @parentSection.Name
+                           asp-route-categoryId="@parentCategory.Id">
+                            @parentCategory.Name
                         </a>
                     </h4>
                 </div>

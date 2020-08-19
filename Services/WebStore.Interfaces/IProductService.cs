@@ -20,7 +20,7 @@ namespace WebStore.Infrastructure.Interfaces
 
         /// <summary>Секция по Id</summary>
         /// <param name="id">Id</param>
-        Category GetSectionById(int id);
+        Category GetCategoryById(int id);
 
         /// <summary>Бренд по Id</summary>
         /// <param name="id">Id</param>

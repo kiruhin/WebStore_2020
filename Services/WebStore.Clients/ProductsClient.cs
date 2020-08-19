@@ -48,9 +48,9 @@ namespace WebStore.Clients
             return result;
         }
 
-        public Category GetSectionById(int id)
+        public Category GetCategoryById(int id)
         {
-            var url = $"{ServiceAddress}/sections/{id}";
+            var url = $"{ServiceAddress}/categories/{id}";
             var result = Get<Category>(url);
             return result;
         }

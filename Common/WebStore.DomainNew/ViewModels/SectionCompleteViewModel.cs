@@ -5,10 +5,10 @@ using WebStore.Models;
 
 namespace WebStore.DomainNew.ViewModels
 {
-    public class SectionCompleteViewModel
+    public class CategoryCompleteViewModel
     {
-        public IEnumerable<CategoryViewModel> Sections { get; set; }
-        public int? CurrentParentSectionId { get; set; }
-        public int? CurrentSectionId { get; set; }
+        public IEnumerable<CategoryViewModel> Categories { get; set; }
+        public int? CurrentParentCategoryId { get; set; }
+        public int? CurrentCategoryId { get; set; }
     }
 }

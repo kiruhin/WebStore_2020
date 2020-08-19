@@ -8,28 +8,28 @@ using WebStore.Models;
 
 namespace WebStore.ViewComponents
 {
-    public class Sections : ViewComponent
+    public class Categories : ViewComponent
     {
         private readonly IProductService _productService;
 
-        public Sections(IProductService productService)
+        public Categories(IProductService productService)
         {
             _productService = productService;
         }
 
-        // основной метод компонента теперь будет принимать параметр sectionId
-        public async Task<IViewComponentResult> InvokeAsync(string sectionId)
+        // основной метод компонента теперь будет принимать параметр categoryId
+        public async Task<IViewComponentResult> InvokeAsync(string categoryId)
         {
-            // сконвертируем строковый sectionId в число
-            int.TryParse(sectionId, out var sectionIdInt);
-            // будем получать id родительской секции в методе GetSections()
-            var sections = GetSections(sectionIdInt, out var parentSectionId);
+            // сконвертируем строковый categoryId в число
+            int.TryParse(categoryId, out var categoryIdInt);
+            // будем получать id родительской секции в методе GetCategories()
+            var categories = GetCategories(categoryIdInt, out var parentCategoryId);
             // возвращать будем новую модель с инфой о текущей секции/категории
-            return View(new SectionCompleteViewModel
+            return View(new CategoryCompleteViewModel
             {
-                Sections = sections, 
-                CurrentSectionId = sectionIdInt, 
-                CurrentParentSectionId = parentSectionId
+                Categories = categories, 
+                CurrentCategoryId = categoryIdInt, 
+                CurrentParentCategoryId = parentCategoryId
             });
         }
 
@@ -38,54 +38,54 @@ namespace WebStore.ViewComponents
         /// также получает id родительской категории для переданной категории
         /// </summary>
         /// <returns></returns>
-        private List<CategoryViewModel> GetSections(int? sectionId, out int? parentSectionId)
+        private List<CategoryViewModel> GetCategories(int? categoryId, out int? parentCategoryId)
         {
-            parentSectionId = null;
+            parentCategoryId = null;
 
             var categories = _productService.GetCategories();
 
             var parentCategories = categories.Where(x => !x.ParentId.HasValue).ToArray();
-            var parentSections = new List<CategoryViewModel>();
+            var parentCategoriesVm = new List<CategoryViewModel>();
 
             // получим и заполним родительские категории
             foreach (var parentCategory in parentCategories)
             {
-                parentSections.Add(new CategoryViewModel()
+                parentCategoriesVm.Add(new CategoryViewModel()
                 {
                     Id = parentCategory.Id,
                     Name = parentCategory.Name,
                     Order = parentCategory.Order,
-                    ParentCategory= null
+                    ParentCategory = null
                 });
             }
 
             // получим и заполним дочерние категории
-            foreach (var sectionViewModel in parentSections)
+            foreach (var categoryViewModel in parentCategoriesVm)
             {
-                var childCategories = categories.Where(c => c.ParentId == sectionViewModel.Id);
+                var childCategories = categories.Where(c => c.ParentId == categoryViewModel.Id);
                 foreach (var childCategory in childCategories)
                 {
                     // определение родительской категории
-                    if (childCategory.Id == sectionId)
-                        parentSectionId = sectionViewModel.Id;
+                    if (childCategory.Id == categoryId)
+                        parentCategoryId = categoryViewModel.Id;
 
-                    sectionViewModel.ChildCategories.Add(new CategoryViewModel
+                    categoryViewModel.ChildCategories.Add(new CategoryViewModel()
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,
                         Order = childCategory.Order,
-                        ParentCategory = sectionViewModel
+                        ParentCategory = categoryViewModel
                     });
                 }
 
-                sectionViewModel.ChildCategories = sectionViewModel.ChildCategories
+                categoryViewModel.ChildCategories = categoryViewModel.ChildCategories
                     .OrderBy(c => c.Order)
                     .ToList();
             }
 
-            parentSections = parentSections.OrderBy(c => c.Order).ToList();
+            parentCategoriesVm = parentCategoriesVm.OrderBy(c => c.Order).ToList();
 
-            return parentSections;
+            return parentCategoriesVm;
         }
     }
 }

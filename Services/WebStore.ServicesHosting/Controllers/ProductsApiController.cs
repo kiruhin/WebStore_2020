@@ -50,10 +50,10 @@ namespace WebStore.ServicesHosting.Controllers
             return product;
         }
 
-        [HttpGet("sections/{id}")]
-        public Category GetSectionById(int id)
+        [HttpGet("categories/{id}")]
+        public Category GetCategoryById(int id)
         {
-            return _productService.GetSectionById(id);
+            return _productService.GetCategoryById(id);
         }
 
         [HttpGet("brands/{id}")]

@@ -18,7 +18,7 @@ namespace WebStore.DomainNew.Helpers
                 ImageUrl = p.ImageUrl,
                 // добавим информацию о бренде, если она есть
                 Brand = p.BrandId.HasValue ? new BrandDto {Id = p.Brand.Id, Name = p.Brand.Name} : null,
-                Section = new SectionDto
+                Category = new CategoryDto
                 {
                     Id = p.CategoryId,
                     Name = p.Category.Name

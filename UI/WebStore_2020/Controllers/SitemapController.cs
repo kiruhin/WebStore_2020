@@ -32,14 +32,14 @@ namespace WebStore.Controllers
             };
 
             // список всех категорий товаров
-            var sections = _productData.GetCategories();
-            foreach (var section in sections)
+            var categories = _productData.GetCategories();
+            foreach (var category in categories)
             {
-                if (section.ParentId.HasValue)
+                if (category.ParentId.HasValue)
                     nodes.Add(new SitemapNode(Url.Action(
                         "Shop",
                         "Catalog",
-                        new { sectionId = section.Id })));
+                        new { categoryId = category.Id })));
             }
 
             // список всех брендов

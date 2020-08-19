@@ -5,7 +5,7 @@ using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.DomainNew.Dto
 {
-    public class SectionDto : INamedEntity
+    public class CategoryDto : INamedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -26,15 +26,15 @@ namespace WebStore.ViewComponents
 
             switch (type)
             {
-                case BreadCrumbType.Section:
-                    var section = _productService.GetSectionById(id);
+                case BreadCrumbType.Category:
+                    var category = _productService.GetCategoryById(id);
                     return View(new List<BreadCrumbViewModel>
                     {
                         new BreadCrumbViewModel()
                         {
                             BreadCrumbType = type,
                             Id = id.ToString(),
-                            Name = section.Name
+                            Name = category.Name
                         }
                     });
                 case BreadCrumbType.Brand:
@@ -62,12 +62,12 @@ namespace WebStore.ViewComponents
             var item = _productService.GetProductById(id);
             var crumbs = new List<BreadCrumbViewModel>();
 
-            if (fromType == BreadCrumbType.Section)
+            if (fromType == BreadCrumbType.Category)
                 crumbs.Add(new BreadCrumbViewModel
                 {
                     BreadCrumbType = fromType,
-                    Id = item.Section.Id.ToString(),
-                    Name = item.Section.Name
+                    Id = item.Category.Id.ToString(),
+                    Name = item.Category.Name
                 });
             else
                 crumbs.Add(new BreadCrumbViewModel

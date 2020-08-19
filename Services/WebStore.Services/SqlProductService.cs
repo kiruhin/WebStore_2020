@@ -57,7 +57,7 @@ namespace WebStore.Infrastructure.Services
 
         }
 
-        public Category GetSectionById(int id)
+        public Category GetCategoryById(int id)
         {
             return _context.Categories.FirstOrDefault(s => s.Id == id);
         }

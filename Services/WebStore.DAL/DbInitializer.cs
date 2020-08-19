@@ -237,9 +237,9 @@ namespace WebStore.DAL
             };
             using (var trans = context.Database.BeginTransaction())
             {
-                foreach (var section in categories)
+                foreach (var category in categories)
                 {
-                    context.Categories.Add(section);
+                    context.Categories.Add(category);
                 }
 
                 context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");

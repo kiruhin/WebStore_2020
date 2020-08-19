@@ -3,14 +3,14 @@
     Layout = "_Layout";
 
     // Получаем тип для бренда или секции
-    var type = Context.Request.Query.ContainsKey("sectionId")
-        ? BreadCrumbType.Section
+    var type = Context.Request.Query.ContainsKey("categoryId")
+        ? BreadCrumbType.Category
         : Context.Request.Query.ContainsKey("brandId")
             ? BreadCrumbType.Brand
             : BreadCrumbType.None;
 
     // Устанавливаем дефолтное значение источника
-    var fromType = BreadCrumbType.Section;
+    var fromType = BreadCrumbType.Category;
 
     // Если это метод деталей товара
     if ((string)ViewContext.RouteData.Values["action"] == "ProductDetails")
@@ -25,8 +25,8 @@
     {
         case BreadCrumbType.None:
             break;
-        case BreadCrumbType.Section:
-            id = int.Parse(Context.Request.Query["sectionId"].ToString());
+        case BreadCrumbType.Category:
+            id = int.Parse(Context.Request.Query["categoryId"].ToString());
             break;
         case BreadCrumbType.Brand:
             id = int.Parse(Context.Request.Query["brandId"].ToString());

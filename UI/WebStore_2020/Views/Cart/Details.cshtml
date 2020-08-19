@@ -3,7 +3,7 @@
     ViewData["Title"] = "Корзина";
 }
 
-<section id="cart_items">
+<category id="cart_items">
     @*<div class="breadcrumbs">
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
@@ -85,9 +85,9 @@
         </table>
     </div>
 
-</section> <!--/#cart_items-->
+</category> <!--/#cart_items-->
 
-<section id="do_action">
+<category id="do_action">
 
     <div class="heading">
         <h3>Оформите заказ</h3>
@@ -95,4 +95,4 @@
     @Html.Partial("_OrderPartial", Model.OrderViewModel,
         new ViewDataDictionary(ViewData) { { "sumCart", sumCart } })
 
-</section><!--/#do_action-->
+</category><!--/#do_action-->
