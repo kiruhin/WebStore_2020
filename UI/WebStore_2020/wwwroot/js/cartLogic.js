@@ -73,6 +73,7 @@
         $.get(Cart._properties.removeFromCartLink + '/' + id)
             .done(function () {
                 button.closest('tr').remove();
+                Cart.refreshTotalPrice(); 
                 // В случае успеха – обновляем представление
                 Cart.refreshCartView();
             })
@@ -81,26 +82,30 @@
             });
     },
 
-    incrementItem: function (event) {
+    incrementItem: function () {
         var button = $(this);
         // Строка товара
         var container = button.closest('tr');
         // Отменяем дефолтное действие
         event.preventDefault();
         // Получение идентификатора из атрибута
-        var id = button.data('id');	
+        var id = button.data('id');
 
-        // Вызов метода контроллера
-        $.get(Cart._properties.addToCartLink + '/' + id).done(function () {
-            // Получаем значение
-            var value = parseInt($('.cart_quantity_input', container).val());
-            // Увеличиваем его на 1
-            $('.cart_quantity_input', container).val(value + 1);
-            // Обновляем цену
-            Cart.refreshPrice(container);
-            // В случае успеха – обновляем представление
-            Cart.refreshCartView();
-        }).fail(function () { console.log('incrementItem error'); });
+        // вызываем ajax-метод get по адресу addToCartLink 
+        $.get(Cart._properties.addToCartLink + '/' + id)
+            .done(function () {
+                // Получаем значение
+                var value = parseInt($('.cart_quantity_input', container).val());
+                // Увеличиваем его на 1
+                $('.cart_quantity_input', container).val(value + 1);
+                // Обновляем цену
+                Cart.refreshPrice(container);
+                // В случае успеха – обновляем представление
+                Cart.refreshCartView();
+            })
+            .fail(function () {
+                console.log('incrementItem error');
+            });
     },
     
     refreshPrice: function (container) {
@@ -117,6 +122,18 @@
         $('.cart_total_price', container).data('price', totalPrice);
         // Меняем значение
         $('.cart_total_price', container).html(value);
+        Cart.refreshTotalPrice(); 
+    },
+
+    refreshTotalPrice: function () {
+        var total = 0;
+        $('.cart_total_price').each(function () {
+            var price = parseFloat($(this).data('price'));
+            total += price;
+        });
+        var value = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        $('#totalOrderSum').html(value);
     }
+
 
 }
