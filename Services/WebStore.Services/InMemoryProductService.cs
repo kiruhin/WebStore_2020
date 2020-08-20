@@ -409,27 +409,32 @@ namespace WebStore.Infrastructure.Services
             return _brands;
         }
 
-        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
+        public PagedProductDto GetProducts(ProductFilter filter)
         {
-            var products = _products;
-
-            if (filter.CategoryId.HasValue)
-            {
-                products = products
-                    .Where(x => x.CategoryId == filter.CategoryId.Value)
-                    .ToList();
-            }
-            if (filter.BrandId.HasValue)
-            {
-                products = products
-                    .Where(p => p.BrandId.HasValue && p.BrandId.Value == filter.BrandId.Value)
-                    .ToList();
-            }
-
-            return products
-                .Select(p => p.ToDto())
-                .ToList();
+            throw new System.NotImplementedException();
         }
+
+        //public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
+        //{
+        //    var products = _products;
+
+        //    if (filter.CategoryId.HasValue)
+        //    {
+        //        products = products
+        //            .Where(x => x.CategoryId == filter.CategoryId.Value)
+        //            .ToList();
+        //    }
+        //    if (filter.BrandId.HasValue)
+        //    {
+        //        products = products
+        //            .Where(p => p.BrandId.HasValue && p.BrandId.Value == filter.BrandId.Value)
+        //            .ToList();
+        //    }
+
+        //    return products
+        //        .Select(p => p.ToDto())
+        //        .ToList();
+        //}
 
         public ProductDto GetProductById(int id)
         {

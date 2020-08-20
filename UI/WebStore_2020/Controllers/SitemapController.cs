@@ -54,7 +54,7 @@ namespace WebStore.Controllers
 
             // список всех страниц товаров
             var products = _productData.GetProducts(new ProductFilter());
-            foreach (var productDto in products)
+            foreach (var productDto in products.Products)
             {
                 nodes.Add(new SitemapNode(Url.Action(
                     "ProductDetails",

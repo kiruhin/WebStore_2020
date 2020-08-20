@@ -30,21 +30,34 @@ namespace WebStore.Infrastructure.Services
             return _context.Brands.ToList();
         }
 
-        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
+        public PagedProductDto GetProducts(ProductFilter filter)
         {
-            var query = _context.Products
-                .Include(p => p.Category) // жадная загрузка (Eager Load) для категорий
-                .Include(p => p.Brand) // жадная загрузка (Eager Load) для брендов
+            var products = _context.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
                 .AsQueryable();
 
-            if (filter.BrandId.HasValue)
-                query = query.Where(c => c.BrandId.HasValue && c.BrandId.Value.Equals(filter.BrandId.Value));
             if (filter.CategoryId.HasValue)
-                query = query.Where(c => c.CategoryId.Equals(filter.CategoryId.Value));
+                products = products.Where(x => x.CategoryId == filter.CategoryId.Value);
+            if (filter.BrandId.HasValue)
+                products = products.Where(x => x.BrandId == filter.BrandId.Value);
 
-            return query
-                .Select(p => p.ToDto())
-                .ToList();
+            var model = new PagedProductDto { TotalCount = products.Count() };
+            if (filter.PageSize != null) // если указан размер страницы
+            {
+                model.Products = products
+                    .OrderBy(p => p.Order)
+                    .Skip((filter.Page - 1) * (int)filter.PageSize) // пропустим просмотренные товары
+                    .Take((int)filter.PageSize) // возьмем нужное количество
+                    .Select(p => p.ToDto()).ToList(); // сконвертируем в DTO
+            }
+            else // иначе работаем по старой логике
+            {
+                model.Products = products
+                    .OrderBy(p => p.Order)
+                    .Select(p => p.ToDto()).ToList();
+            }
+            return model;
         }
 
         public ProductDto GetProductById(int id)

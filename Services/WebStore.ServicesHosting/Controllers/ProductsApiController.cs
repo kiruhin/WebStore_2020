@@ -38,7 +38,7 @@ namespace WebStore.ServicesHosting.Controllers
  
         [HttpPost]
         [ActionName("Post")]
-        public IEnumerable<ProductDto> GetProducts([FromBody]ProductFilter filter)
+        public PagedProductDto GetProducts([FromBody]ProductFilter filter)
         {
             return _productService.GetProducts(filter);
         }
