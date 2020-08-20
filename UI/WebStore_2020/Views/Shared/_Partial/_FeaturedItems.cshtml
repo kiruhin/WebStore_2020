@@ -23,11 +23,12 @@
                         <h2>@item.Price.ToString("C")</h2>
                         <p>@item.Name</p>
 
-                        <a asp-controller="Cart"
-                           asp-action="AddToCart"
-                           asp-route-id="@item.Id"
-                           asp-route-returnUrl="@Context.Request.Path"
-                           class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
+                        <a 
+                            data-id="@item.Id"
+                            class="btn btn-fefault cart callAddToCart">
+                            <i class="fa fa-shopping-cart"></i>
+                            Add to cart
+                        </a>
                     </div>
                 </div>
                 <div class="choose">
