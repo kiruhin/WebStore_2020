@@ -3,15 +3,22 @@
         // Ссылка на метод добавления товара в корзину
         addToCartLink: '',
         // Ссылка на получение представления корзины
-        getCartViewLink: ''
+        getCartViewLink: '',
+        // Ссылка на удаление товара из корзины
+        removeFromCartLink: ''
+
     },
 
     init: function (properties) {
         // Копируем свойства
         $.extend(Cart._properties, properties);
         // Инициализируем перехват события
-        
+
         $('a.callAddToCart').on('click', Cart.addToCart);
+
+        // Кнопка «Удалить товар из корзины»
+        $('.cart_quantity_delete').on('click', Cart.removeFromCart);
+
     },
 
     // Событие добавления товара в корзину
@@ -30,7 +37,7 @@
         }).fail(function () { console.log('addToCart error'); });
     },
 
-    
+
     refreshCartView: function () {
         // Получаем контейнер корзины
         var container = $('#cartContainer');
@@ -51,6 +58,24 @@
         setTimeout(function () {
             button.tooltip('destroy');
         }, 500);
+    },
+
+    removeFromCart: function (event) {
+        var button = $(this);
+        // Отменяем дефолтное действие
+        event.preventDefault();
+        // Получение идентификатора из атрибута
+        var id = button.data('id');
+        // вызываем ajax-метод get по адресу removeFromCartLink
+        $.get(Cart._properties.removeFromCartLink + '/' + id)
+            .done(function () {
+                button.closest('tr').remove();
+                // В случае успеха – обновляем представление
+                Cart.refreshCartView();
+            })
+            .fail(function () {
+                console.log('removeFromCart error');
+            });
     }
 
 }

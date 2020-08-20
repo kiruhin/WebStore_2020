@@ -41,7 +41,7 @@ namespace WebStore.Controllers
         public IActionResult RemoveFromCart(int id)
         {
             _cartService.RemoveFromCart(id);
-            return RedirectToAction("Details");
+            return Json(new { id, message = "Товар удален из корзины" });
         }
 
         public IActionResult RemoveAll()
