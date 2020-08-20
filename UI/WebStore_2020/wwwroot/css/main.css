@@ -2521,7 +2521,8 @@ h2.title {
 }
 
 .panel-body ul li.active, /*для дочерней категории*/
-.panel-heading h4.active /*для корневой категории*/ {
-    text-decoration: underline;
+.panel-heading h4.active, /*для корневой категории*/
+.brands-name ul li.active {
+	text-decoration: underline;
 }
 

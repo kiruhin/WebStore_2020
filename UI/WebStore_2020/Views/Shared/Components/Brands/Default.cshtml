@@ -1,14 +1,19 @@
-﻿@model IEnumerable<WebStore.Models.BrandViewModel>
+﻿@model WebStore.DomainNew.ViewModels.BrandCompleteViewModel
 
 <div class="brands_products">
     <!--brands_products-->
     <h2>Бренды</h2>
     <div class="brands-name">
         <ul class="nav nav-pills nav-stacked">
-            @foreach (var brand in Model)
+            @foreach (var brand in Model.Brands)
             {
-                <li><a href="#"> <span class="pull-right">
-                    (@brand.ProductsCount)</span>@brand.Name</a></li>
+            <li @(brand.Id == Model.CurrentBrandId ? "class=active" : null)>
+                <a asp-controller="Catalog" asp-action="Shop" asp-route-brandId="@brand.Id">
+                    <span class="pull-right">
+                        (@brand.ProductsCount)
+                    </span>@brand.Name
+                </a>
+            </li>
             }
         </ul>
     </div>
