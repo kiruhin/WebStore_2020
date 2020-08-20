@@ -19,6 +19,9 @@
         // Кнопка «Удалить товар из корзины»
         $('.cart_quantity_delete').on('click', Cart.removeFromCart);
 
+        // Кнопка «+»
+        $('.cart_quantity_up').on('click', Cart.incrementItem);
+
     },
 
     // Событие добавления товара в корзину
@@ -76,6 +79,44 @@
             .fail(function () {
                 console.log('removeFromCart error');
             });
+    },
+
+    incrementItem: function (event) {
+        var button = $(this);
+        // Строка товара
+        var container = button.closest('tr');
+        // Отменяем дефолтное действие
+        event.preventDefault();
+        // Получение идентификатора из атрибута
+        var id = button.data('id');	
+
+        // Вызов метода контроллера
+        $.get(Cart._properties.addToCartLink + '/' + id).done(function () {
+            // Получаем значение
+            var value = parseInt($('.cart_quantity_input', container).val());
+            // Увеличиваем его на 1
+            $('.cart_quantity_input', container).val(value + 1);
+            // Обновляем цену
+            Cart.refreshPrice(container);
+            // В случае успеха – обновляем представление
+            Cart.refreshCartView();
+        }).fail(function () { console.log('incrementItem error'); });
+    },
+    
+    refreshPrice: function (container) {
+        // Получаем количество
+        var quantity = parseInt($('.cart_quantity_input', container).val());
+        // Получаем цену
+        var price = parseFloat($('.cart_price', container).data('price'));
+        // Рассчитываем общую стоимость
+        var totalPrice = quantity * price;
+        // Для отображения в виде валюты
+        var value = totalPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+        // Сохраняем стоимость для поля «Итого»
+        $('.cart_total_price', container).data('price', totalPrice);
+        // Меняем значение
+        $('.cart_total_price', container).html(value);
     }
 
 }

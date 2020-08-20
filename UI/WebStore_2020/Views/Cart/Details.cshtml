@@ -52,14 +52,11 @@
                     </td>
                     <td class="cart_quantity">
                         <div class="cart_quantity_button">
-                            <a asp-controller="Cart"
-                               asp-action="AddToCart"
-                               asp-route-id="@item.Key.Id"
-                               asp-route-returnUrl="@Context.Request.Path"
-                               class="cart_quantity_up"> +
-                            </a>
+                            <a href="#" class="cart_quantity_up" data-id="@item.Key.Id">+</a>
 
-                            <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+                            <input class="cart_quantity_input" type="text" name="quantity" 
+                                   value="@item.Value" autocomplete="off" size="2">
+
                             <a asp-controller="Cart"
                                asp-action="DecrementFromCart"
                                asp-route-id="@item.Key.Id"
