@@ -234,6 +234,7 @@ namespace WebStore.XUnitTests
                     new CartItem(){ProductId = 1, Quantity = 4}
                 }
             };
+
             var products = new List<ProductDto>()
             {
                 new ProductDto()
@@ -246,8 +247,10 @@ namespace WebStore.XUnitTests
                 }
             };
 
+            PagedProductDto pagedProducts = new PagedProductDto {Products = products};
+
             var productData = new Mock<IProductService>();
-            productData.Setup(c => c.GetProducts(It.IsAny<ProductFilter>())).Returns(products);
+            productData.Setup(c => c.GetProducts(It.IsAny<ProductFilter>())).Returns(pagedProducts);
             var cartStore = new Mock<ICartStore>();
             cartStore.Setup(c => c.Cart).Returns(cart);
 
