@@ -6,6 +6,13 @@
             @User.Identity.Name
         </a>
     </span>
+
+    if (User.IsInRole("Admins"))
+    {
+        <a asp-action="Index" asp-controller="Home" asp-area="Admin" class="btn btn-sm btn-link">
+            Админка</a>
+    }
+
     <form method="post" asp-controller="Account" asp-action="Logout" asp-antiforgery="true">
         <input type="submit" value="Выход" class="btn btn-default" />
     </form>
