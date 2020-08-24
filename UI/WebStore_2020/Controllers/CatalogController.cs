@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using WebStore.Domain;
@@ -25,31 +27,19 @@ namespace WebStore.Controllers
         {
             var pageSize = int.Parse(_configuration["PageSize"]);
 
-            var products = _productService.GetProducts(
-                new ProductFilter { BrandId = brandId, CategoryId = categoryId,
-                    Page = page, 
-                    PageSize = pageSize
-                });
-
-            var model = new CatalogViewModel()
+            var products = GetProducts(categoryId, brandId, page, out var totalCount);
+      
+            // сконвертируем в CatalogViewModel
+            var model = new CatalogViewModel
             {
                 BrandId = brandId,
                 CategoryId = categoryId,
-                Products = products.Products.Select(p => new ProductViewModel()
-                {
-                    Id = p.Id,
-                    ImageUrl = p.ImageUrl,
-                    Name = p.Name,
-                    Order = p.Order,
-                    Price = p.Price,
-                    Brand = p.Brand?.Name ?? string.Empty
-                }).OrderBy(p => p.Order)
-                    .ToList(),
+                Products = products,
                 PageViewModel = new PageViewModel
                 {
                     PageSize = pageSize,
                     PageNumber = page,
-                    TotalItems = products.TotalCount
+                    TotalItems = totalCount
                 }
             };
 
@@ -74,6 +64,36 @@ namespace WebStore.Controllers
 
         }
 
+        public IActionResult GetFilteredItems(int? categoryId, int? brandId, int page = 1)
+        {
+            var productsModel = GetProducts(categoryId, brandId, page, out var totalCount);
+
+            return PartialView("_Partial/_FeaturedItems", productsModel);
+        }
+
+        private IEnumerable<ProductViewModel> GetProducts(int? categoryId, int? brandId, int page, out int totalCount)
+        {
+            var products = _productService.GetProducts(new ProductFilter
+            {
+                CategoryId = categoryId,
+                BrandId = brandId,
+                Page = page,
+                PageSize = int.Parse(_configuration["PageSize"])
+            });
+            totalCount = products.TotalCount;
+
+            return products.Products.Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    ImageUrl = p.ImageUrl,
+                    Name = p.Name,
+                    Order = p.Order,
+                    Price = p.Price,
+                    Brand = p.Brand?.Name ?? String.Empty
+                })
+                .OrderBy(p => p.Order)
+                .ToList();
+        }
 
     }
 }
