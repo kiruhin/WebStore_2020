@@ -5,8 +5,9 @@
         // Ссылка на получение представления корзины
         getCartViewLink: '',
         // Ссылка на удаление товара из корзины
-        removeFromCartLink: ''
-
+        removeFromCartLink: '',
+        // Ссылка на уменьшение количества товаров
+        decrementLink: ''
     },
 
     init: function (properties) {
@@ -21,6 +22,9 @@
 
         // Кнопка «+»
         $('.cart_quantity_up').on('click', Cart.incrementItem);
+
+        // Кнопка «-»
+        $('.cart_quantity_down').on('click', Cart.decrementItem);
 
     },
 
@@ -133,7 +137,28 @@
         });
         var value = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
         $('#totalOrderSum').html(value);
-    }
+    },
 
+    decrementItem: function () {
+        var button = $(this);
+        // Строка товара
+        var container = button.closest('tr');
+        // Отменяем дефолтное действие
+        event.preventDefault();
+        // Получение идентификатора из атрибута
+        var id = button.data('id');
+        $.get(Cart._properties.decrementLink + '/' + id).done(function () {
+            var value = parseInt($('.cart_quantity_input', container).val());
+            if (value > 1) {
+                // Уменьшаем его на 1
+                $('.cart_quantity_input', container).val(value - 1);
+                Cart.refreshPrice(container);
+            } else {
+                container.remove();
+            }
+            // В случае успеха – обновляем представление
+            Cart.refreshCartView();
+        }).fail(function () { console.log('decrementItem error'); });
+    }
 
 }

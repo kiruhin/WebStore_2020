@@ -57,11 +57,7 @@
                             <input class="cart_quantity_input" type="text" name="quantity" 
                                    value="@item.Value" autocomplete="off" size="2">
 
-                            <a asp-controller="Cart"
-                               asp-action="DecrementFromCart"
-                               asp-route-id="@item.Key.Id"
-                               class="cart_quantity_down"> -
-                            </a>
+                            <a href="#" class="cart_quantity_down" data-id="@item.Key.Id">-</a>
                         </div>
                     </td>
                     <td class="cart_total">
