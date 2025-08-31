@@ -1,1 +1,1 @@
-asdfasdf asdf
+это веб-проект в школе Geekbrains
